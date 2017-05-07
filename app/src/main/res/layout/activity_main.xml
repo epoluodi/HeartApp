@@ -5,6 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/backimg"
     android:orientation="vertical"
     tools:context="custome.zhongyuan.com.heartapp.MainActivity">
 
@@ -31,7 +32,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="?android:attr/windowBackground"
+        android:background="@color/blackTransparent3"
+        app:itemTextColor="@color/white"
+        app:itemIconTint="@color/white"
         app:menu="@menu/navigation" />
 
 </LinearLayout>

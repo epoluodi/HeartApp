@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/herthome"
         android:icon="@mipmap/menu1"
 
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/report"
         android:icon="@mipmap/menu2"
         android:title="@string/title_dashboard" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/userinfo"
         android:icon="@mipmap/menu3"
         android:title="@string/title_notifications" />
 

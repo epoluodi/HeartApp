@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import java.security.MessageDigest;
+
 import custome.zhongyuan.com.heartapp.FrameController.FragmentMangerX;
 import custome.zhongyuan.com.heartapp.FrameController.FragmentName;
 
@@ -77,10 +79,10 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentnow = homeFragment;
 
-
-
-
+     
 
     }
+
+
 
 }

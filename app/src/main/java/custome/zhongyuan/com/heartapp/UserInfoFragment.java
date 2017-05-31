@@ -1,6 +1,7 @@
 package custome.zhongyuan.com.heartapp;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +11,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
+import custome.zhongyuan.com.heartapp.Activity.BLDeviceActivity;
+import custome.zhongyuan.com.heartapp.Activity.GuardianActivity;
+import custome.zhongyuan.com.heartapp.Activity.SelfInfoActivity;
 import custome.zhongyuan.com.heartapp.CustomView.STImageView;
 import custome.zhongyuan.com.heartapp.FrameController.FragmentName;
 
@@ -54,11 +58,42 @@ public class UserInfoFragment extends Fragment implements FragmentName {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_userinfo, container, false);
+
+        menu2 = (RelativeLayout)rootView.findViewById(R.id.menu2);
+        menu3 = (RelativeLayout)rootView.findViewById(R.id.menu3);
+        menu4 = (RelativeLayout)rootView.findViewById(R.id.menu4);
+        menu2.setOnClickListener(onClickListenermenu);
+        menu3.setOnClickListener(onClickListenermenu);
+        menu4.setOnClickListener(onClickListenermenu);
         circleImg = (STImageView)rootView.findViewById(R.id.nickimg);
         circleImg.setmIsCircle(true);
 
+
         return rootView;
     }
+
+
+    View.OnClickListener onClickListenermenu = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent;
+            switch (view.getId())
+            {
+                case R.id.menu2:
+                    intent=new Intent(getActivity(), SelfInfoActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.menu3:
+                    intent=new Intent(getActivity(), GuardianActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.menu4:
+                    intent=new Intent(getActivity(), BLDeviceActivity.class);
+                    startActivity(intent);
+                    break;
+            }
+        }
+    };
 
 
 

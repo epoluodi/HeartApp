@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/backimg"
+
+
+    >
+
+    <RelativeLayout
+        android:id="@+id/headview"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/blackTransparent2">
+
+        <ImageView
+            android:id="@+id/btnreturn"
+            android:layout_width="50dp"
+            android:layout_height="26dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/back_bar_left_selector" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:text="设备信息"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <ImageView
+            android:id="@+id/btnquery"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/query_bar_right_selector" />
+
+    </RelativeLayout>
+
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/headview"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@mipmap/device" />
+
+    <TextView
+        android:id="@+id/dname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/img"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/img"
+        android:text="设备名称：HEART-100"
+        android:textColor="@color/white"
+        android:textSize="18dp" />
+
+
+    <TextView
+        android:id="@+id/serial_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dname"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/img"
+        android:text="设备序列号：100ABVC-123pos-10001"
+        android:textColor="@color/white"
+        android:textSize="14dp" />
+
+
+    <View
+        android:id="@+id/v1"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/img"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/blackTransparent2" />
+
+    <RelativeLayout
+        android:id="@+id/deviceinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/v1">
+
+        <RelativeLayout
+            android:id="@+id/menu_power"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/userinfo_menu_selector"
+            android:clickable="true">
+
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="46dp"
+                android:text="设备电量"
+                android:textColor="@color/white"
+
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/power"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="36dp"
+                android:text="20%"
+                android:textColor="#ff0900"
+                android:textSize="14dp" />
+
+
+            <View
+
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/blackTransparent2" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/menu_memory"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@+id/menu_power"
+            android:background="@drawable/userinfo_menu_selector"
+            android:clickable="true">
+
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="46dp"
+                android:text="缓存信息"
+                android:textColor="@color/white"
+
+                android:textSize="14dp" />
+
+            <TextView
+
+                android:id="@+id/mem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="36dp"
+                android:text="总共:100KB 剩余：10KB"
+                android:textColor="@color/whitesmoke"
+                android:textSize="14dp" />
+
+
+            <View
+
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/blackTransparent2" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/menu_ver"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@+id/menu_memory"
+            android:background="@drawable/userinfo_menu_selector"
+            android:clickable="true">
+
+
+            <TextView
+                android:id="@+id/t9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="46dp"
+                android:text="固件版本"
+                android:textColor="@color/white"
+
+                android:textSize="14dp" />
+
+            <TextView
+
+                android:id="@+id/ver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="36dp"
+                android:text="Ver:1.0.1"
+                android:textColor="@color/whitesmoke"
+                android:textSize="14dp" />
+
+
+            <View
+
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/blackTransparent2" />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/menu_init"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@+id/deviceinfo"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/userinfo_menu_selector"
+        android:clickable="true">
+
+
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/blackTransparent2" />
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="初始化设备"
+            android:textColor="@color/white"
+
+            android:textSize="14dp" />
+
+
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/blackTransparent2" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/menu_disconnect"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@+id/menu_init"
+
+        android:background="@drawable/userinfo_menu_selector"
+        android:clickable="true">
+
+
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/blackTransparent2" />
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="断开设备"
+            android:textColor="@color/white"
+
+            android:textSize="14dp" />
+
+
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/blackTransparent2" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

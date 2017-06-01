@@ -14,6 +14,7 @@ import android.widget.TextView;
 import custome.zhongyuan.com.heartapp.Activity.BLDeviceActivity;
 import custome.zhongyuan.com.heartapp.Activity.GuardianActivity;
 import custome.zhongyuan.com.heartapp.Activity.SelfInfoActivity;
+import custome.zhongyuan.com.heartapp.Activity.SettingActivity;
 import custome.zhongyuan.com.heartapp.CustomView.STImageView;
 import custome.zhongyuan.com.heartapp.FrameController.FragmentName;
 
@@ -62,9 +63,11 @@ public class UserInfoFragment extends Fragment implements FragmentName {
         menu2 = (RelativeLayout)rootView.findViewById(R.id.menu2);
         menu3 = (RelativeLayout)rootView.findViewById(R.id.menu3);
         menu4 = (RelativeLayout)rootView.findViewById(R.id.menu4);
+        menu5 = (RelativeLayout)rootView.findViewById(R.id.menu5);
         menu2.setOnClickListener(onClickListenermenu);
         menu3.setOnClickListener(onClickListenermenu);
         menu4.setOnClickListener(onClickListenermenu);
+        menu5.setOnClickListener(onClickListenermenu);
         circleImg = (STImageView)rootView.findViewById(R.id.nickimg);
         circleImg.setmIsCircle(true);
 
@@ -89,6 +92,10 @@ public class UserInfoFragment extends Fragment implements FragmentName {
                     break;
                 case R.id.menu4:
                     intent=new Intent(getActivity(), BLDeviceActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.menu5:
+                    intent=new Intent(getActivity(), SettingActivity.class);
                     startActivity(intent);
                     break;
             }

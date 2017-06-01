@@ -51,9 +51,8 @@ public class ReportFragment extends Fragment implements FragmentName {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_userinfo, container, false);
-//        circleImg = (STImageView)rootView.findViewById(R.id.nickimg);
-//        circleImg.setmIsCircle(true);
+        View rootView = inflater.inflate(R.layout.fragment_report, container, false);
+
 
         return rootView;
     }

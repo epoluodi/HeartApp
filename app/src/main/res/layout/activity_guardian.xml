@@ -11,7 +11,7 @@
     <RelativeLayout
         android:id="@+id/headview"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:background="@color/blackTransparent2">
 
         <ImageView
@@ -19,7 +19,7 @@
             android:layout_width="50dp"
             android:layout_height="26dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:src="@drawable/back_bar_left_selector" />
 
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="10dp"
             android:text="监护人信息"
             android:textColor="@color/white"
             android:textSize="20dp" />

@@ -1,12 +1,18 @@
 package custome.zhongyuan.com.heartapp;
 
 import android.app.Fragment;
+import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.security.MessageDigest;
 
@@ -79,10 +85,41 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentnow = homeFragment;
 
-     
+
+        //判断蓝牙是否打开
+        if (!Common.isBluetoothEnable())
+        {
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            builder.setTitle("提示");
+            builder.setMessage("请打开蓝牙设置");
+            builder.setPositiveButton("打开蓝牙", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                    openSetting();
+                    return;
+                }
+            });
+            builder.setNeutralButton("取消",null);
+            AlertDialog alertDialog=builder.create();
+            alertDialog.show();
+
+        }
 
     }
 
 
+    private  void openSetting(){
+        Intent intent = new Intent();
+        intent.setAction(Settings.ACTION_BLUETOOTH_SETTINGS);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        try{
+            startActivity(intent);
+        } catch(ActivityNotFoundException ex){
+            ex.printStackTrace();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
 }

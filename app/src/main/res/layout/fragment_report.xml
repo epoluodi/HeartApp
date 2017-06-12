@@ -233,10 +233,18 @@
             />
     </RelativeLayout>
 
-    <View
+    <LinearLayout
+
+        android:id="@+id/chart"
         android:layout_width="match_parent"
         android:layout_height="130dp"
+
         android:layout_marginBottom="60dp"
 
-        />
+
+
+        android:orientation="vertical" >
+
+    </LinearLayout>
+
 </LinearLayout>

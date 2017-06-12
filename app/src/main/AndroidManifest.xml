@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="custome.zhongyuan.com.heartapp">
 
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED"/>
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,7 +26,8 @@
         <activity android:name=".Activity.SelfInfoActivity" />
         <activity android:name=".Activity.GuardianActivity" />
         <activity android:name=".Activity.BLDeviceActivity" />
-        <activity android:name=".Activity.SettingActivity"></activity>
+        <activity android:name=".Activity.SettingActivity" />
+        <activity android:name=".Activity.QueryDeviceActivity"></activity>
     </application>
 
 </manifest>

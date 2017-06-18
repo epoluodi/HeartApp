@@ -9,33 +9,89 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import custome.zhongyuan.com.heartapp.Common;
+import custome.zhongyuan.com.heartapp.Device;
 import custome.zhongyuan.com.heartapp.R;
 
 public class QueryDeviceActivity extends AppCompatActivity {
 
 
-    private ListView listView;
+
     private Timer timer;
     private BluetoothManager bluetoothManager;
     private BluetoothAdapter bluetoothAdapter;
-    private List<Map<String,String>> mapList;
+
+    private Map<String,Device> mapList;
+    private ImageView btnreturn;
+    private ListView listView;
+
+
+    private ImageView btnrefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_query_device);
-        listView = (ListView)findViewById(R.id.list);
 
-        mapList=new ArrayList<>();
+        btnreturn = (ImageView)findViewById(R.id.btnreturn);
+        listView = (ListView)findViewById(R.id.list);
+        btnreturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        btnrefresh = (ImageView)findViewById(R.id.btnquery);
+        btnrefresh.setOnClickListener(onClickListenerrefresh);
+        mapList=new HashMap<>();
+        refreshDevice();
+
+    }
+
+    Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what)
+            {
+                case 1:
+                    Common.ShowPopWindow(listView,getLayoutInflater(),"正在搜索...");
+                    break;
+                case 0:
+                    bluetoothAdapter.stopLeScan(leScanCallback);
+                    Common.CLosePopwindow();
+                    break;
+            }
+
+        }
+    };
+
+
+    View.OnClickListener onClickListenerrefresh = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            refreshDevice();
+
+        }
+    };
+
+
+    private void refreshDevice()
+    {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -58,26 +114,8 @@ public class QueryDeviceActivity extends AppCompatActivity {
                 },5000,100);
             }
         }).start();
-
     }
 
-    Handler handler=new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what)
-            {
-                case 1:
-                    Common.ShowPopWindow(listView,getLayoutInflater(),"正在搜索...");
-                    break;
-                case 0:
-                    bluetoothAdapter.stopLeScan(leScanCallback);
-                    Common.CLosePopwindow();
-                    break;
-            }
-
-        }
-    };
 
     private void read() {
         bluetoothManager =
@@ -93,23 +131,49 @@ public class QueryDeviceActivity extends AppCompatActivity {
             Log.i("搜索 信号", device.getAddress());
             Log.i("搜索 信号", String.valueOf(rssi));
 
-////            HC-08
-//            if (device.getName().equals(blname)) {
-//
-//                Message message = handler.obtainMessage();
-//                message.obj = "设备名称:" + device.getName() + "\n" +
-//                        "设备地址:" + device.getAddress() + "\n";
-//
-//                handler.sendMessage(message);
-//
-//                bluetoothGatt = device.connectGatt(MainActivity.this, false, bluetoothGattCallback);
-//                bluetoothGatt.connect();
-//                bluetoothAdapter.stopLeScan(leScanCallback);
-//            }
+
+            if (!mapList.containsKey(device.getName()))
+            {
+                Device bldevice=new Device();
+                bldevice.setDeviceName(device.getName());
+                bldevice.setDeviceMAC(device.getAddress());
+                bldevice.setDeviceSignalVales(rssi);
+                mapList.put(device.getName(),bldevice);
+            }
+
+
 
         }
 
 
     };
+
+
+
+    private class Myadpter extends BaseAdapter
+    {
+        @Override
+        public int getCount() {
+            return mapList.size();
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return i;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+
+
+
+            return view;
+        }
+    }
 
 }

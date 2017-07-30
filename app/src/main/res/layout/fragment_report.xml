@@ -63,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="全体平均心率"
+            android:text="全天平均心率"
             android:textColor="@color/white"
             android:textSize="18dp"
             android:textStyle="bold" />
@@ -124,7 +124,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="全体最高心率"
+            android:text="全天最高心率"
             android:textColor="@color/white"
             android:textSize="18dp"
             android:textStyle="bold" />
@@ -184,7 +184,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="全体最低心率"
+            android:text="全天最低心率"
             android:textColor="@color/white"
             android:textSize="18dp"
             android:textStyle="bold" />

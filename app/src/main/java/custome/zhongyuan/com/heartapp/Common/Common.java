@@ -1,4 +1,4 @@
-package custome.zhongyuan.com.heartapp;
+package custome.zhongyuan.com.heartapp.Common;
 
 import android.app.NotificationManager;
 import android.bluetooth.BluetoothAdapter;
@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import custome.zhongyuan.com.heartapp.R;
 import custome.zhongyuan.com.heartapp.db.DBManager;
 
 

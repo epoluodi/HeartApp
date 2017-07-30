@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/backimg"
+    android:background="@color/black"
 
 
     >
@@ -11,7 +11,7 @@
         android:id="@+id/headview"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/blackTransparent2">
+        android:background="@color/gray">
 
         <ImageView
             android:id="@+id/btnreturn"

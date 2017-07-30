@@ -5,17 +5,19 @@ import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.security.MessageDigest;
-
+import custome.zhongyuan.com.heartapp.Activity.BLDeviceActivity;
+import custome.zhongyuan.com.heartapp.Activity.QueryDeviceActivity;
+import custome.zhongyuan.com.heartapp.Common.Common;
+import custome.zhongyuan.com.heartapp.Common.LibConfig;
 import custome.zhongyuan.com.heartapp.FrameController.FragmentMangerX;
 import custome.zhongyuan.com.heartapp.FrameController.FragmentName;
 
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private HomeFragment homeFragment;
     private ReportFragment reportFragment;
     private Fragment fragmentnow;
+    private BottomNavigationView navigation;
+    private Handler handler;
 
     public static FragmentMangerX fragmentMangerX; //fragment框架
 
@@ -59,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        handler = new Handler();
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 //        navigation.setSelectedItemId(0);
 
@@ -106,7 +110,88 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+
+
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (BLController.getBlController().getMacAddr().equals("-"))
+        {
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            builder.setTitle("提示");
+            builder.setMessage("没有连接设备，现在开始连接");
+            builder.setPositiveButton("开始连接", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                    Toast.makeText(MainActivity.this,"请确保设备属于打开状态",Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(MainActivity.this,QueryDeviceActivity.class);
+                    startActivityForResult(intent,QueryDeviceActivity.REQUESTCODE);
+                    return;
+                }
+            });
+            builder.setNeutralButton("取消",null);
+            AlertDialog alertDialog=builder.create();
+            alertDialog.show();
+        }
+        else
+        {
+            Toast.makeText(MainActivity.this,"准备开始连接设备",Toast.LENGTH_SHORT).show();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Common.ShowPopWindow(navigation, getLayoutInflater(), "正在连接...");
+                    BLController.getBlController().setBlCallBack(blCallBack);
+                    BLController.getBlController().connectDeviceForMac(
+                            LibConfig.getKeyShareVarForString("mac"));
+                }
+            },1000);
+
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == QueryDeviceActivity.REQUESTCODE)
+        {
+            if (resultCode ==1)
+            {
+                //开始连接
+                Common.ShowPopWindow(navigation, getLayoutInflater(), "正在连接...");
+                BLController.getBlController().setBlCallBack(blCallBack);
+                BLController.getBlController().connectDevie();
+            }
+
+        }
+    }
+
+
+    BLController.BLCallBack blCallBack=new BLController.BLCallBack() {
+        @Override
+        public void OnConnectedDevice() {
+
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Common.CLosePopwindow();
+                    Toast.makeText(App.getApp(),"设备连接成功",Toast.LENGTH_SHORT).show();
+
+
+                }
+            });
+
+        }
+
+        @Override
+        public void OnDisConenectDeivce() {
+            Toast.makeText(App.getApp(),"设备连接断开",Toast.LENGTH_SHORT).show();
+        }
+    };
 
 
     private  void openSetting(){

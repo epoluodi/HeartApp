@@ -1,5 +1,7 @@
 package custome.zhongyuan.com.heartapp;
 
+import android.bluetooth.BluetoothDevice;
+
 /**
  * Created by yangxiaoguang on 2017/6/19.
  */
@@ -12,7 +14,15 @@ public class Device {
     private int deviceSignalVales;
     private int deviceVerID;
     private String deviceID;
+    private BluetoothDevice bluetoothDevice;
 
+    public BluetoothDevice getBluetoothDevice() {
+        return bluetoothDevice;
+    }
+
+    public void setBluetoothDevice(BluetoothDevice bluetoothDevice) {
+        this.bluetoothDevice = bluetoothDevice;
+    }
 
     public String getDeviceName() {
         return deviceName;

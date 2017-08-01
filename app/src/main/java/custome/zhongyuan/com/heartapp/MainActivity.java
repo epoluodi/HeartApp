@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -13,6 +14,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import custome.zhongyuan.com.heartapp.Activity.BLDeviceActivity;
 import custome.zhongyuan.com.heartapp.Activity.QueryDeviceActivity;
@@ -29,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private Fragment fragmentnow;
     private BottomNavigationView navigation;
     private Handler handler;
+    private Timer timer;
+
 
     public static FragmentMangerX fragmentMangerX; //fragment框架
 
@@ -140,6 +146,15 @@ public class MainActivity extends AppCompatActivity {
         else
         {
             Toast.makeText(MainActivity.this,"准备开始连接设备",Toast.LENGTH_SHORT).show();
+            timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    handlerdisconnect.sendEmptyMessage(0);
+                    timer.cancel();
+                    timer = null;
+                }
+            }, 5000, 100);
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -152,6 +167,22 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
+
+    Handler handlerdisconnect = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+
+                case 0:
+                    BLController.getBlController().disConnectDevice();
+                    Common.CLosePopwindow();
+                    break;
+            }
+
+        }
+    };
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

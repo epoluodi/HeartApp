@@ -47,10 +47,10 @@ public class BLController {
 
     /**
      * 连接指定的mac 地址
+     *
      * @param mac
      */
-    public void connectDeviceForMac(String mac)
-    {
+    public void connectDeviceForMac(String mac) {
         BluetoothDevice localBluetoothDevice = BluetoothAdapter.
                 getDefaultAdapter().getRemoteDevice(mac);
         setBluetoothDevice(localBluetoothDevice);
@@ -65,9 +65,9 @@ public class BLController {
     }
 
 
-    public void disConnectDevice()
-    {
-        bluetoothGatt.disconnect();
+    public void disConnectDevice() {
+        if (bluetoothGatt != null)
+            bluetoothGatt.disconnect();
         bluetoothDevice = null;
         bluetoothGatt = null;
         if (blCallBack != null)
@@ -80,9 +80,10 @@ public class BLController {
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
             super.onConnectionStateChange(gatt, status, newState);
             if (newState == BluetoothProfile.STATE_CONNECTED) {
+                bluetoothDevice = gatt.getDevice();
+                LibConfig.setKeyShareVar("mac", bluetoothDevice.getAddress());
                 Log.i("连接服务，开始扫描蓝牙中得服务", "----》");
                 if (blCallBack != null) {
-                    LibConfig.setKeyShareVar("mac",bluetoothDevice.getAddress());
                     blCallBack.OnConnectedDevice();
                 }
             }
@@ -145,6 +146,7 @@ public class BLController {
     public interface BLCallBack {
 
         void OnConnectedDevice();
+
         void OnDisConenectDeivce();
     }
 

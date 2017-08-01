@@ -6,12 +6,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import custome.zhongyuan.com.heartapp.App;
 import custome.zhongyuan.com.heartapp.BLController;
 import custome.zhongyuan.com.heartapp.Common.Common;
+import custome.zhongyuan.com.heartapp.Common.LibConfig;
+import custome.zhongyuan.com.heartapp.MainActivity;
 import custome.zhongyuan.com.heartapp.R;
 
 public class BLDeviceActivity extends AppCompatActivity {
@@ -19,7 +22,7 @@ public class BLDeviceActivity extends AppCompatActivity {
     private ImageView btnquery;
     private Handler handler;
     private TextView dname,serial_number,mem,power,ver;
-    private TextView btndisconnect;
+    private RelativeLayout btndisconnect;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,11 +43,12 @@ public class BLDeviceActivity extends AppCompatActivity {
         ver = (TextView)findViewById(R.id.ver);
 
 
-        btndisconnect = (TextView)findViewById(R.id.btndisconnect);
+        btndisconnect = (RelativeLayout)findViewById(R.id.menu_disconnect);
         btndisconnect.setOnClickListener(onClickListenerdisconnect);
 
         BLController.getBlController().setBlCallBack(blCallBack);
         handler = new Handler();
+        initDeviceInfo();
     }
 
 
@@ -60,11 +64,24 @@ public class BLDeviceActivity extends AppCompatActivity {
             ver.setText("-");//版本号
 
             BLController.getBlController().disConnectDevice();
-
+            LibConfig.setKeyShareVar("mac", "-");
+            Toast.makeText(BLDeviceActivity.this,"已经断开连接",Toast.LENGTH_SHORT).show();
         }
     };
 
 
+    private void initDeviceInfo()
+    {
+        if (BLController.getBlController().getBluetoothDevice()!=null) {
+            dname.setText("设备名称:" +
+                    BLController.getBlController().getBluetoothDevice().getName());
+            serial_number.setText("设备序列号:" + "-");
+
+            power.setText("0%");//电量
+            mem.setText("无"); //缓存信息
+            ver.setText("V1.0");//版本号
+        }
+    }
 
     BLController.BLCallBack blCallBack=new BLController.BLCallBack() {
         @Override
@@ -74,13 +91,7 @@ public class BLDeviceActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     Common.CLosePopwindow();
-                    dname.setText("设备名称:"+
-                    BLController.getBlController().getBluetoothDevice().getName());
-                    serial_number.setText("设备序列号:" + "-");
-
-                    power.setText("0%");//电量
-                    mem.setText("无"); //缓存信息
-                    ver.setText("V1.0");//版本号
+                    initDeviceInfo();
 
 
                 }

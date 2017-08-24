@@ -211,7 +211,10 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
                     Common.CLosePopwindow();
                     Toast.makeText(App.getApp(),"设备连接成功",Toast.LENGTH_SHORT).show();
-
+                    if (timer !=null) {
+                        timer.cancel();
+                        timer = null;
+                    }
 
                 }
             });

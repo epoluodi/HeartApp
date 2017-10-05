@@ -37,11 +37,12 @@
     </RelativeLayout>
 
     <RelativeLayout
+
         android:id="@+id/menu_nick"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_below="@+id/headview"
-
+        android:visibility="gone"
         android:background="@drawable/userinfo_menu_selector"
         android:clickable="true">
 
@@ -205,6 +206,7 @@
             android:textSize="16dp" />
 
         <TextView
+
             android:id="@+id/phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

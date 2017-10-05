@@ -15,6 +15,7 @@ import custome.zhongyuan.com.heartapp.Activity.BLDeviceActivity;
 import custome.zhongyuan.com.heartapp.Activity.GuardianActivity;
 import custome.zhongyuan.com.heartapp.Activity.SelfInfoActivity;
 import custome.zhongyuan.com.heartapp.Activity.SettingActivity;
+import custome.zhongyuan.com.heartapp.Common.LibConfig;
 import custome.zhongyuan.com.heartapp.CustomView.STImageView;
 import custome.zhongyuan.com.heartapp.FrameController.FragmentName;
 
@@ -71,7 +72,8 @@ public class UserInfoFragment extends Fragment implements FragmentName {
         circleImg = (STImageView)rootView.findViewById(R.id.nickimg);
         circleImg.setmIsCircle(true);
 
-
+        txtname = (TextView)rootView.findViewById(R.id.name);
+        txtname.setText(LibConfig.getKeyShareVarForString("nickName"));
         return rootView;
     }
 

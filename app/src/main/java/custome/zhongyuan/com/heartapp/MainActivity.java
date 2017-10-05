@@ -77,8 +77,8 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentMangerX = new FragmentMangerX(getFragmentManager(), R.id.container);
         userInfofragment = new UserInfoFragment();
-        reportFragment= new ReportFragment();
-        homeFragment=new HomeFragment();
+        reportFragment = new ReportFragment();
+        homeFragment = new HomeFragment();
 
         ((FragmentName) userInfofragment).SetFragmentName("userInfofragment");
         fragmentMangerX.AddFragment(userInfofragment, "userInfofragment");
@@ -97,9 +97,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         //判断蓝牙是否打开
-        if (!Common.isBluetoothEnable())
-        {
-            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        if (!Common.isBluetoothEnable()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("提示");
             builder.setMessage("请打开蓝牙设置");
             builder.setPositiveButton("打开蓝牙", new DialogInterface.OnClickListener() {
@@ -110,12 +109,11 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
             });
-            builder.setNeutralButton("取消",null);
-            AlertDialog alertDialog=builder.create();
+            builder.setNeutralButton("取消", null);
+            AlertDialog alertDialog = builder.create();
             alertDialog.show();
 
         }
-
 
 
     }
@@ -124,46 +122,46 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        if (BLController.getBlController().getMacAddr().equals("-"))
-        {
-            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        if (BLController.getBlController().getMacAddr().equals("-")) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("提示");
             builder.setMessage("没有连接设备，现在开始连接");
             builder.setPositiveButton("开始连接", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     dialogInterface.dismiss();
-                    Toast.makeText(MainActivity.this,"请确保设备属于打开状态",Toast.LENGTH_SHORT).show();
-                    Intent intent=new Intent(MainActivity.this,QueryDeviceActivity.class);
-                    startActivityForResult(intent,QueryDeviceActivity.REQUESTCODE);
+                    Toast.makeText(MainActivity.this, "请确保设备属于打开状态", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, QueryDeviceActivity.class);
+                    startActivityForResult(intent, QueryDeviceActivity.REQUESTCODE);
                     return;
                 }
             });
-            builder.setNeutralButton("取消",null);
-            AlertDialog alertDialog=builder.create();
+            builder.setNeutralButton("取消", null);
+            AlertDialog alertDialog = builder.create();
             alertDialog.show();
-        }
-        else
-        {
-            Toast.makeText(MainActivity.this,"准备开始连接设备",Toast.LENGTH_SHORT).show();
-            timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    handlerdisconnect.sendEmptyMessage(0);
-                    timer.cancel();
-                    timer = null;
-                }
-            }, 5000, 100);
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Common.ShowPopWindow(navigation, getLayoutInflater(), "正在连接...");
-                    BLController.getBlController().setBlCallBack(blCallBack);
-                    BLController.getBlController().connectDeviceForMac(
-                            LibConfig.getKeyShareVarForString("mac"));
-                }
-            },1000);
+        } else {
+            if (BLController.getBlController().getBluetoothDevice() == null) {
+                Toast.makeText(MainActivity.this, "准备开始连接设备", Toast.LENGTH_SHORT).show();
+                timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        handlerdisconnect.sendEmptyMessage(0);
+                        timer.cancel();
+                        timer = null;
+                    }
+                }, 5000, 100);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Common.ShowPopWindow(navigation, getLayoutInflater(), "正在连接...");
+                        BLController.getBlController().setBlCallBack(blCallBack);
+                        BLController.getBlController().connectDeviceForMac(
+                                LibConfig.getKeyShareVarForString("mac"));
+                    }
+                }, 1000);
+            }
+
 
         }
     }
@@ -188,10 +186,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == QueryDeviceActivity.REQUESTCODE)
-        {
-            if (resultCode ==1)
-            {
+        if (requestCode == QueryDeviceActivity.REQUESTCODE) {
+            if (resultCode == 1) {
                 //开始连接
                 Common.ShowPopWindow(navigation, getLayoutInflater(), "正在连接...");
                 BLController.getBlController().setBlCallBack(blCallBack);
@@ -202,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    BLController.BLCallBack blCallBack=new BLController.BLCallBack() {
+    BLController.BLCallBack blCallBack = new BLController.BLCallBack() {
         @Override
         public void OnConnectedDevice() {
 
@@ -210,8 +206,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     Common.CLosePopwindow();
-                    Toast.makeText(App.getApp(),"设备连接成功",Toast.LENGTH_SHORT).show();
-                    if (timer !=null) {
+                    Toast.makeText(App.getApp(), "设备连接成功", Toast.LENGTH_SHORT).show();
+                    if (timer != null) {
                         timer.cancel();
                         timer = null;
                     }
@@ -223,20 +219,20 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void OnDisConenectDeivce() {
-            Toast.makeText(App.getApp(),"设备连接断开",Toast.LENGTH_SHORT).show();
+            Toast.makeText(App.getApp(), "设备连接断开", Toast.LENGTH_SHORT).show();
         }
     };
 
 
-    private  void openSetting(){
+    private void openSetting() {
         Intent intent = new Intent();
         intent.setAction(Settings.ACTION_BLUETOOTH_SETTINGS);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        try{
+        try {
             startActivity(intent);
-        } catch(ActivityNotFoundException ex){
+        } catch (ActivityNotFoundException ex) {
             ex.printStackTrace();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

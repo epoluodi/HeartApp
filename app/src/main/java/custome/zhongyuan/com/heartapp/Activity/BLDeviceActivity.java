@@ -18,7 +18,7 @@ import custome.zhongyuan.com.heartapp.MainActivity;
 import custome.zhongyuan.com.heartapp.R;
 
 public class BLDeviceActivity extends AppCompatActivity {
-
+    private ImageView btnreturn;
     private ImageView btnquery;
     private Handler handler;
     private TextView dname,serial_number,mem,power,ver;
@@ -27,6 +27,14 @@ public class BLDeviceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bldevice);
+        btnreturn = (ImageView)findViewById(R.id.btnreturn);
+
+        btnreturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         btnquery = (ImageView)findViewById(R.id.btnquery);
         btnquery.setOnClickListener(new View.OnClickListener() {
             @Override

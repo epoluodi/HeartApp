@@ -55,7 +55,7 @@
                 android:layout_marginTop="10dp"
 
                 android:text="提醒设置"
-                android:textColor="@color/whitesmoke" />
+                android:textColor="@color/gray" />
 
             <RelativeLayout
                 android:id="@+id/menu_notification1"
@@ -193,7 +193,7 @@
                 android:layout_marginTop="10dp"
 
                 android:text="心电监测提醒"
-                android:textColor="@color/whitesmoke" />
+                android:textColor="@color/gray" />
 
             <RelativeLayout
                 android:id="@+id/menu_common1"
@@ -215,7 +215,7 @@
                     android:textSize="16dp" />
 
                 <TextView
-                    android:id="@+id/sizemode"
+                    android:id="@+id/max"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -265,7 +265,7 @@
 
 
                 <TextView
-                    android:id="@+id/bunffersize"
+                    android:id="@+id/min"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -298,7 +298,7 @@
                 android:layout_marginTop="10dp"
 
                 android:text="心电监测报警提醒"
-                android:textColor="@color/white" />
+                android:textColor="@color/gray" />
 
             <RelativeLayout
                 android:id="@+id/menu_notification4"

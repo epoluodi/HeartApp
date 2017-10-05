@@ -6,31 +6,27 @@
     android:orientation="vertical">
 
 
-
-
-
     <custome.zhongyuan.com.heartapp.CustomView.STImageView
+        android:id="@+id/nickimg"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:scaleType="centerInside"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
+        android:scaleType="centerInside"
         android:src="@mipmap/nickimg"
-        android:id="@+id/nickimg"
+        android:visibility="gone" />
 
-        />
-
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/name"
-    android:textColor="@color/white"
-    android:text="王二小"
-    android:layout_marginTop="5dp"
-    android:textAlignment="center"
-    android:textSize="26dp"
-    android:layout_marginBottom="5dp"
-    />
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:text="王二小"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="26dp" />
 
     <RelativeLayout
         android:id="@+id/menu2"
